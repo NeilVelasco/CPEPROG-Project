@@ -94,10 +94,11 @@
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" pref="51" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel2" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="63" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -297,6 +298,9 @@
                             <Property name="rows" type="int" value="5"/>
                             <Property name="text" type="java.lang.String" value="ENTER PROCEDURE HERE"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextArea2.addMouseListener(new MouseAdapter(){&#xa;@Override&#xa;    public void mouseClicked(MouseEvent e){&#xa;        if(jTextArea2.getText().equals(&quot;ENTER PROCEDURE HERE&quot;)){&#xa;            jTextArea2.setText(&quot;&quot;);&#xa;        }      &#xa;    }&#xa;});"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -444,6 +448,9 @@
                             <Property name="rows" type="int" value="5"/>
                             <Property name="text" type="java.lang.String" value="ENTER INGREDIENTS HERE"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextArea1.addMouseListener(new MouseAdapter(){&#xa;@Override&#xa;    public void mouseClicked(MouseEvent e){&#xa;        if(jTextArea1.getText().equals(&quot;ENTER INGREDIENTS HERE&quot;)){&#xa;            jTextArea1.setText(&quot;&quot;);&#xa;        }      &#xa;    }&#xa;});"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -458,6 +465,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextField1.addMouseListener(new MouseAdapter(){&#xa;@Override&#xa;    public void mouseClicked(MouseEvent e){&#xa;        if(jTextField1.getText().equals(&quot;Enter the recipe name here&quot;)){&#xa;            jTextField1.setText(&quot;&quot;);&#xa;        }&#xa;    }&#xa;});"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
