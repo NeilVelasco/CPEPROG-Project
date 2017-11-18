@@ -8,6 +8,8 @@ package cpeprog;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -345,7 +347,19 @@ public class RecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFieldActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+       //Checking of Connection.
+        String url="jdbc:mysql://localhost:3306/recipes";
+        Properties prop=new Properties();
+        prop.setProperty("user","root");
+        prop.setProperty("password","");
+        Driver d=new com.mysql.jdbc.Driver();
+        Connection con = d.connect(url,prop);
+        if(con==null)   {
+            System.out.println("connection failed");
+            return;
+        }else{
+            System.out.println("Connected.");
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
