@@ -45,7 +45,7 @@ public class RecipeGUI extends javax.swing.JFrame {
         menuButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        recipeTitle = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -115,12 +115,12 @@ public class RecipeGUI extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel3.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 24)); // NOI18N
+        recipeTitle.setFont(new java.awt.Font("Adobe Garamond Pro", 0, 24)); // NOI18N
         if(foodName.isEmpty()){
-            jLabel3.setText("Untitled Recipe");
+            recipeTitle.setText("Untitled Recipe");
         }
         else {
-            jLabel3.setText(foodName);
+            recipeTitle.setText(foodName);
         }
 
         jPanel3.setBackground(new java.awt.Color(204, 0, 0));
@@ -272,14 +272,14 @@ public class RecipeGUI extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(recipeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(recipeTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,25 +341,64 @@ public class RecipeGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        
+
     }//GEN-LAST:event_searchFieldActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-       //Checking of Connection.
-        String url="jdbc:mysql://localhost:3306/recipes";
-        Properties prop=new Properties();
-        prop.setProperty("user","root");
-        prop.setProperty("password","");
-        Driver d=new com.mysql.jdbc.Driver();
-        Connection con = d.connect(url,prop);
-        if(con==null)   {
-            System.out.println("connection failed");
-            return;
-        }else{
-            System.out.println("Connected.");
+        //Checking of Connection.
+        try {
+            String url = "jdbc:mysql://localhost:3306/recipes";
+            Properties prop = new Properties();
+            prop.setProperty("user", "root");
+            prop.setProperty("password", "");
+            Driver d = new com.mysql.jdbc.Driver();
+            Connection con = d.connect(url, prop);
+            if (con == null) {
+                System.out.println("connection failed");
+                return;
+            } else {
+                System.out.println("Connected.");
+            }
+            Statement stat = con.createStatement();
+            //Selecting the Recipe
+            String selectedRecipe;
+            selectedRecipe = searchField.getText();
+            ResultSet result = stat.executeQuery("Select * From MainIndex Where "
+                    + "Recipe Title` = \'" + selectedRecipe + "\'");
+            //Displaying the Recipe.
+            String recipeType = "";
+            String servingSize = "";
+            String ingredients = "";
+            String steps = "";
+            while (result.next()) {
+                selectedRecipe = result.getString(1);
+                recipeType = result.getString(2);
+                servingSize = result.getString(3);
+                ingredients = result.getString(4);
+                steps = result.getString(5);
+            }
+            recipeTitle.setText(selectedRecipe);
+
+            ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
+                    + ingredients);
+            while (ingredientsBreakdown.next()) {
+                ingredientsTextArea.setText(ingredientsBreakdown.getString(3) + "\t"
+                        + ingredientsBreakdown.getString(2) + "\t"
+                        + ingredientsBreakdown.getString(1));
+            }
+
+            ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
+                    + steps);
+            while (stepsBreakdoawn.next()) {
+                procedureTextArea.setText(stepsBreakdoawn.getInt(1) + "\t"
+                        + stepsBreakdoawn.getString(2));
+            }
+        } catch (Exception e) {
+            System.out.println("Do Not connect to DB - Error: " + e);
         }
+
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
@@ -410,8 +449,6 @@ public class RecipeGUI extends javax.swing.JFrame {
     private ImageIcon imageIcon;
     private Image image;
     private Image newimg;
-    private javax.swing.JLabel jLabel3;
-    private String foodName= "";
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -431,6 +468,8 @@ public class RecipeGUI extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JButton menuButton;
     private javax.swing.JTextArea procedureTextArea;
+    private javax.swing.JLabel recipeTitle;
+    private String foodName= "";
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
