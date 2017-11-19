@@ -366,7 +366,7 @@ public class RecipeGUI extends javax.swing.JFrame {
             String selectedRecipe;
             selectedRecipe = searchField.getText();
             ResultSet result = stat.executeQuery("Select * From MainIndex Where "
-                    + "Recipe Title` = \'" + selectedRecipe + "\'");
+                    + "'Recipe Title' = \'" + selectedRecipe + "\'");
             //Displaying the Recipe.
             String recipeType = "";
             String servingSize = "";
