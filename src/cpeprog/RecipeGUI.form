@@ -44,9 +44,6 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[900, 500]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -331,7 +328,7 @@
                             <BindingProperty name="wrapStyleWord" source="procedureTextArea" sourcePath="${text_ON_FOCUS_LOST}" target="procedureTextArea" targetPath="wrapStyleWord" updateStrategy="0" immediately="false"/>
                           </BindingProperties>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="procedureTextArea.setEditable(false);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="procedureTextArea.setEditable(false);&#xa;procedureTextArea.setLineWrap(true);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>

@@ -75,7 +75,6 @@ public class RecipeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
@@ -141,6 +140,7 @@ public class RecipeGUI extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(procedureTextArea);
         procedureTextArea.setEditable(false);
+        procedureTextArea.setLineWrap(true);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
