@@ -33,6 +33,7 @@ public class RecipeGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -106,12 +107,12 @@ public class RecipeGUI extends javax.swing.JFrame {
             }
         });
 
-        imageIcon = new javax.swing.ImageIcon(getClass().getResource("/cpeprog/search.png"));
-        image = imageIcon.getImage(); // transform it
-        newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageIcon = new ImageIcon(newimg);  // transform it back
+        //imageIcon = new javax.swing.ImageIcon(getClass().getResource("search.png"));
+        //image = imageIcon.getImage(); // transform it
+        //newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        //imageIcon = new ImageIcon(newimg);  // transform it back
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(imageIcon);
+        //jLabel2.setIcon(imageIcon);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -134,6 +135,10 @@ public class RecipeGUI extends javax.swing.JFrame {
         procedureTextArea.setColumns(20);
         procedureTextArea.setRows(5);
         procedureTextArea.setText("ENTER PROCEDURE HERE");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, procedureTextArea, org.jdesktop.beansbinding.ELProperty.create("${text_ON_FOCUS_LOST}"), procedureTextArea, org.jdesktop.beansbinding.BeanProperty.create("wrapStyleWord"));
+        bindingGroup.addBinding(binding);
+
         jScrollPane2.setViewportView(procedureTextArea);
         procedureTextArea.setEditable(false);
 
@@ -294,7 +299,7 @@ public class RecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,7 +320,7 @@ public class RecipeGUI extends javax.swing.JFrame {
                         .addComponent(searchButton)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(menuButton))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -337,6 +342,8 @@ public class RecipeGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -366,7 +373,7 @@ public class RecipeGUI extends javax.swing.JFrame {
             String selectedRecipe;
             selectedRecipe = searchField.getText();
             ResultSet result = stat.executeQuery("Select * From MainIndex Where "
-                    + "Recipe Title` = \'" + selectedRecipe + "\'");
+                    + "`Recipe Title` = \'" + selectedRecipe + "\'");
             //Displaying the Recipe.
             String recipeType = "";
             String servingSize = "";
@@ -383,16 +390,20 @@ public class RecipeGUI extends javax.swing.JFrame {
 
             ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
                     + ingredients);
+            ingredientsTextArea.setText("");
             while (ingredientsBreakdown.next()) {
-                ingredientsTextArea.setText(ingredientsBreakdown.getString(3) + "\t"
+                ingredientsTextArea.setText(ingredientsTextArea.getText()+"\n"
+                        +ingredientsBreakdown.getString(3) + "\t"
                         + ingredientsBreakdown.getString(2) + "\t"
                         + ingredientsBreakdown.getString(1));
             }
 
             ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
                     + steps);
+            procedureTextArea.setText("");
             while (stepsBreakdoawn.next()) {
-                procedureTextArea.setText(stepsBreakdoawn.getInt(1) + "\t"
+                procedureTextArea.setText(procedureTextArea.getText()+"\n"
+                        +stepsBreakdoawn.getInt(1) + "\t"
                         + stepsBreakdoawn.getString(2));
             }
         } catch (Exception e) {
@@ -472,5 +483,6 @@ public class RecipeGUI extends javax.swing.JFrame {
     private String foodName= "";
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

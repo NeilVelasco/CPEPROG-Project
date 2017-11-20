@@ -90,7 +90,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="176" max="32767" attributes="0"/>
+                  <EmptySpace pref="302" max="32767" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="searchField" min="-2" pref="208" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
                           <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="menuButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabel1" alignment="0" pref="62" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" pref="31" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
@@ -181,8 +181,8 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private ImageIcon imageIcon;&#xa;private Image image;&#xa;private Image newimg;"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel2.setIcon(imageIcon);"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="imageIcon = new javax.swing.ImageIcon(getClass().getResource(&quot;/cpeprog/search.png&quot;));&#xa;image = imageIcon.getImage(); // transform it &#xa;newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  &#xa;imageIcon = new ImageIcon(newimg);  // transform it back"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="//jLabel2.setIcon(imageIcon);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//imageIcon = new javax.swing.ImageIcon(getClass().getResource(&quot;search.png&quot;));&#xa;//image = imageIcon.getImage(); // transform it &#xa;//newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  &#xa;//imageIcon = new ImageIcon(newimg);  // transform it back"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel6">
@@ -327,6 +327,9 @@
                             <Property name="rows" type="int" value="5"/>
                             <Property name="text" type="java.lang.String" value="ENTER PROCEDURE HERE"/>
                           </Properties>
+                          <BindingProperties>
+                            <BindingProperty name="wrapStyleWord" source="procedureTextArea" sourcePath="${text_ON_FOCUS_LOST}" target="procedureTextArea" targetPath="wrapStyleWord" updateStrategy="0" immediately="false"/>
+                          </BindingProperties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="procedureTextArea.setEditable(false);"/>
                           </AuxValues>
