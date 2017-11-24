@@ -5,10 +5,11 @@
  */
 package cpeprog;
 
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -45,16 +46,18 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        procedureTextArea = new javax.swing.JTextArea();
+        addProcedureButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        addIngredientButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ingredientsTextArea = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
@@ -110,16 +113,23 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Avalon", 1, 14)); // NOI18N
         jLabel6.setText("Procedure");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("ENTER PROCEDURE HERE");
-        jScrollPane2.setViewportView(jTextArea2);
-        jTextArea2.addMouseListener(new MouseAdapter(){
+        procedureTextArea.setColumns(20);
+        procedureTextArea.setRows(5);
+        procedureTextArea.setText("ENTER PROCEDURE HERE");
+        jScrollPane3.setViewportView(procedureTextArea);
+        procedureTextArea.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                if(jTextArea2.getText().equals("ENTER PROCEDURE HERE")){
-                    jTextArea2.setText("");
+                if(procedureTextArea.getText().equals("ENTER PROCEDURE HERE")){
+                    procedureTextArea.setText("");
                 }
+            }
+        });
+
+        addProcedureButton.setText("Add Procedure");
+        addProcedureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProcedureButtonActionPerformed(evt);
             }
         });
 
@@ -130,10 +140,12 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(addProcedureButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -141,8 +153,10 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addProcedureButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -198,18 +212,17 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Avalon", 1, 14)); // NOI18N
         jLabel4.setText("Ingredients");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("ENTER INGREDIENTS HERE");
-        jScrollPane1.setViewportView(jTextArea1);
-        jTextArea1.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                if(jTextArea1.getText().equals("ENTER INGREDIENTS HERE")){
-                    jTextArea1.setText("");
-                }
+        addIngredientButton.setText("Add Ingredient");
+        addIngredientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addIngredientButtonActionPerformed(evt);
             }
         });
+
+        ingredientsTextArea.setColumns(20);
+        ingredientsTextArea.setRows(5);
+        ingredientsTextArea.setEditable(false);
+        jScrollPane1.setViewportView(ingredientsTextArea);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -218,9 +231,13 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(addIngredientButton))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +245,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(addIngredientButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -352,9 +371,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -377,6 +394,69 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void addIngredientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientButtonActionPerformed
+        String string = "";
+        if(!isEmptyIngredientsArea()){
+            string = ingredientsTextArea.getText() + "\n";
+        }
+        
+        String s = (String) JOptionPane.showInputDialog(null, "Enter the ingredient name:",
+                "Virtual Chef", JOptionPane.QUESTION_MESSAGE);
+        if (JOptionPane.OK_OPTION == 0) {
+            JTextField xField = new JTextField(5);
+            JTextField yField = new JTextField(5);
+
+            JPanel myPanel = new JPanel(new GridLayout(0, 1));
+            myPanel.add(new JLabel("Enter the quantity and unit of measurement (Ex. 500 grams)"));
+            myPanel.add(new JLabel("Quantity:"));
+            myPanel.add(xField);
+            myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+            myPanel.add(new JLabel("Unit of Measurement:"));
+            myPanel.add(yField);
+
+            int result = JOptionPane.showConfirmDialog(null, myPanel,
+                    "Virtual Chef", JOptionPane.OK_CANCEL_OPTION);
+            if (JOptionPane.OK_OPTION == 0) {
+                ingredientsTextArea.setText(string + xField.getText() + " " + yField.getText() 
+                + "\t" + s);
+            }
+        }
+
+    }//GEN-LAST:event_addIngredientButtonActionPerformed
+
+    private void addProcedureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcedureButtonActionPerformed
+        String string = "";
+        if(!isEmptyProcedureArea()){
+            string = ingredientsTextArea.getText() + "\n";
+        }
+        procedureCounter++;
+        
+        JTextArea textArea = new JTextArea(10,30);
+        JPanel myPanel = new JPanel(new GridLayout(2, 1));
+        myPanel.add(new JLabel("Enter procedure number " + procedureCounter + ":"));
+        myPanel.add(textArea);
+        
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Virtual Chef",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if(result == 0){
+            procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
+        }
+    }//GEN-LAST:event_addProcedureButtonActionPerformed
+    
+    private boolean isEmptyIngredientsArea(){
+        if(ingredientsTextArea.getText().trim().isEmpty()){
+            return true;
+        }
+        else return false;
+    }
+    
+    private boolean isEmptyProcedureArea(){
+        if(procedureTextArea.getText().trim().isEmpty()){
+            return true;
+        }
+        else return false;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -412,7 +492,11 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         });
     }
 
+    private int procedureCounter = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addIngredientButton;
+    private javax.swing.JButton addProcedureButton;
+    private javax.swing.JTextArea ingredientsTextArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private ImageIcon imageIcon;
@@ -432,12 +516,11 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton menuButton;
+    private javax.swing.JTextArea procedureTextArea;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
