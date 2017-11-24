@@ -173,7 +173,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private ImageIcon imageIcon;&#xa;private Image image;&#xa;private Image newimg;"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="imageIcon = new javax.swing.ImageIcon(getClass().getResource(&quot;chefhatpic.png&quot;));&#xa;image = imageIcon.getImage(); // transform it &#xa;newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  &#xa;imageIcon = new ImageIcon(newimg);  // transform it back&#xa;&#xa;jLabel3.setIcon(imageIcon);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon icon = createImageIcon(&quot;chefhatpic.png&quot;,&quot;&quot;);&#xa;image = icon.getImage(); // transform it &#xa;newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  &#xa;imageIcon = new ImageIcon(newimg);  // transform it back&#xa;&#xa;jLabel3.setIcon(icon);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField1">
