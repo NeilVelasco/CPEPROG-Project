@@ -20,7 +20,17 @@ public class StartMenu extends javax.swing.JFrame {
     public StartMenu() {
         initComponents();
     }
-
+    /** Returns an ImageIcon, or null if the path was invalid. */
+    protected ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Couldn't find file: " + path);
+        return null;
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,12 +73,12 @@ public class StartMenu extends javax.swing.JFrame {
             }
         });
 
-        imageIcon = new javax.swing.ImageIcon(getClass().getResource("chefhatpic.png"));
-        image = imageIcon.getImage(); // transform it
+        ImageIcon icon = createImageIcon("chefhatpic.png","");
+        image = icon.getImage(); // transform it
         newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);  // transform it back
 
-        jLabel3.setIcon(imageIcon);
+        jLabel3.setIcon(icon);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
