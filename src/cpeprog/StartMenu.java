@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -186,8 +187,7 @@ public class StartMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        jTextField1.setVisible(true);
-        System.out.println("kek");
+        String s = (String) JOptionPane.showInputDialog(null, "Search", "Enter your search query", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
