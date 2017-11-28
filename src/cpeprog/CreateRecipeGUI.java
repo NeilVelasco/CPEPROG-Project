@@ -121,7 +121,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
 
         procedureTextArea.setColumns(20);
         procedureTextArea.setRows(5);
-        procedureTextArea.setText("ENTER PROCEDURE HERE");
+        procedureTextArea.setText("PROCEDURE HERE");
         jScrollPane3.setViewportView(procedureTextArea);
         procedureTextArea.addMouseListener(new MouseAdapter(){
             @Override
@@ -320,13 +320,13 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(recipeTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(saveTitleButton)
-                        .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(recipeTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -425,23 +425,49 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recipeTitleTextFieldActionPerformed
 
     private void addProcedureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcedureButtonActionPerformed
-        String string = "";
-        if (!isEmptyProcedureArea()) {
-            string = ingredientsTextArea.getText() + "\n";
-        }
-        
-        procedureCounter++;
+        String url = "jdbc:mysql://localhost:3306/recipes";
+        Properties prop = new Properties();
+        prop.setProperty("user", "root");
+        prop.setProperty("password", "");
+        Driver d;
+        try {
+            d = new com.mysql.jdbc.Driver();
+            Connection con = d.connect(url, prop);
+            if (con == null) {
+                System.out.println("connection failed");
+                return;
+            } else {
+                System.out.println("Connected.");
+            }
+            Statement stat = con.createStatement();
+            
+            String string = "";
+            if(procedureTextArea.equals("PROCEDURE HERE")){
+                procedureTextArea.setText(string);
+            }
+            if (!isEmptyProcedureArea()) {
+                string = procedureTextArea.getText() + "\n";
+            }
 
-        JTextArea textArea = new JTextArea(10, 30);
-        JPanel myPanel = new JPanel(new GridLayout(2, 1));
-        myPanel.add(new JLabel("Enter procedure number " + procedureCounter + ":"));
-        myPanel.add(textArea);
+            procedureCounter++;
 
-        int result = JOptionPane.showConfirmDialog(null, myPanel, "Virtual Chef",
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (result == 0) {
-            procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
+            JTextArea textArea = new JTextArea(10, 30);
+            JPanel myPanel = new JPanel(new GridLayout(2, 1));
+            myPanel.add(new JLabel("Enter procedure number " + procedureCounter + ":"));
+            myPanel.add(textArea);
+            textArea.setLineWrap(true);
+            int result = JOptionPane.showConfirmDialog(null, myPanel, "Virtual Chef",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (result == 0) {
+                System.out.println(steps);
+                procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
+                stat.execute("insert into " + steps + "(`Content`)\n"
+                        + "values(\'" + textArea.getText() +"\')");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_addProcedureButtonActionPerformed
 
     private void addIngredientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientButtonActionPerformed
@@ -520,7 +546,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             //Writing the Recipe
             recipeTitle = recipeTitleTextField.getText();
             recipeType = (String) recipeTypeComboBox.getSelectedItem();
-            servingSize = (String) servingSizeSpinner.getValue();
+            servingSize = String.valueOf(servingSizeSpinner.getValue());
             ingredients = recipeWriter.ingredientsName(recipeTitle);
             steps = recipeWriter.stepsName(recipeTitle);
 
@@ -540,7 +566,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         + "`Step Number` int not null primary key auto_increment,\n"
                         + "`Content` blob not null)\n");
             } else {
-                stat.executeUpdate("Update MainIndex"
+                stat.executeUpdate("Update MainIndex "
                         + "Set `Recipe Type` = \'" + recipeType + "\',"
                         + "`Serving Size` = \'" + servingSize + "\'"
                         + "Where `Recipe Title` = \'" + recipeTitle + "\'");
