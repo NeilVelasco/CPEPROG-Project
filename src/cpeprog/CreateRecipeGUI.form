@@ -317,6 +317,7 @@
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="procedureTextArea.addMouseListener(new MouseAdapter(){&#xa;@Override&#xa;    public void mouseClicked(MouseEvent e){&#xa;        if(procedureTextArea.getText().equals(&quot;ENTER PROCEDURE HERE&quot;)){&#xa;            procedureTextArea.setText(&quot;&quot;);&#xa;        }      &#xa;    }&#xa;});"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="procedureTextArea.setEditable(false);"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -457,6 +458,7 @@
                           <Properties>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
+                            <Property name="text" type="java.lang.String" value="INGREDIENTS HERE"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ingredientsTextArea.setEditable(false);"/>
