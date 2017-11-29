@@ -128,6 +128,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         procedureTextArea.setColumns(20);
         procedureTextArea.setRows(5);
         procedureTextArea.setText("PROCEDURE HERE");
+        procedureTextArea.setEditable(false);
         jScrollPane3.setViewportView(procedureTextArea);
         procedureTextArea.addMouseListener(new MouseAdapter(){
             @Override
@@ -217,6 +218,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
 
         ingredientsTextArea.setColumns(20);
         ingredientsTextArea.setRows(5);
+        ingredientsTextArea.setText("INGREDIENTS HERE");
         ingredientsTextArea.setEditable(false);
         jScrollPane1.setViewportView(ingredientsTextArea);
 
@@ -493,6 +495,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             }
             Statement stat = con.createStatement();
             String string = "";
+            if(ingredientsTextArea.equals("INGREDIENTS HERE")){
+                ingredientsTextArea.setText(string);
+            }
             if (!isEmptyIngredientsArea()) {
                 string = ingredientsTextArea.getText() + "\n";
             }
@@ -517,7 +522,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                     String ingredient = s;
                     String measurementSize = xField.getText();
                     String measurementType = yField.getText();
-                    ingredientsTextArea.setText(string + xField.getText() + " " + yField.getText()
+                    ingredientsTextArea.setText(string + xField.getText() + "\t" + yField.getText()
                             + "\t" + s);
                     stat.execute("insert into " + ingredients + "(`Ingredient`,`Measurement"
                             + " Type`,`Measurement Size`)\n"
