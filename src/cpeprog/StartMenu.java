@@ -88,6 +88,7 @@ public class StartMenu extends javax.swing.JFrame {
         imageIcon = new ImageIcon(newimg);  // transform it back
 
         jLabel3.setIcon(icon);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cpeprog/chefhatpic_small.png"))); // NOI18N
 
         jTextField1.setVisible(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -155,8 +156,8 @@ public class StartMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
