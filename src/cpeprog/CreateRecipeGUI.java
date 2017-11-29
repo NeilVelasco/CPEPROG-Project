@@ -20,12 +20,18 @@ import javax.swing.*;
  * @author NeilOliver
  */
 public class CreateRecipeGUI extends javax.swing.JFrame {
+    static HashMap<String, Object> data;    
 
     /**
      * Creates new form CreateRecipeGUI
      */
     public CreateRecipeGUI() {
         initComponents();
+        data=new HashMap<>();
+    }
+    public CreateRecipeGUI(HashMap<String,Object> data) {
+        initComponents();
+        this.data=data;
     }
 
     /**
@@ -309,7 +315,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)

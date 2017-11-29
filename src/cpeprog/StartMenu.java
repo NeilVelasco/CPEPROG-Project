@@ -8,32 +8,38 @@ package cpeprog;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author NeilOliver
- */
 public class StartMenu extends javax.swing.JFrame {
-
+    static HashMap<String, Object> data;    
+    
     /**
      * Creates new form MainMenu
      */
     public StartMenu() {
         initComponents();
+        data=new HashMap<>();
+    }
+    public StartMenu(HashMap<String,Object> data) {
+        initComponents();
+        this.data=data;
     }
     /** Returns an ImageIcon, or null if the path was invalid. */
     protected ImageIcon createImageIcon(String path,
-                                           String description) {
-    java.net.URL imgURL = getClass().getResource(path);
-    if (imgURL != null) {
-        return new ImageIcon(imgURL, description);
-    } else {
-        System.err.println("Couldn't find file: " + path);
-        return null;
-    }
-}
+                                                String description) {
+         java.net.URL imgURL = getClass().getResource(path);
+         if (imgURL != null) {
+             return new ImageIcon(imgURL, description);
+         } else {
+             System.err.println("Couldn't find file: " + path);
+             return null;
+         }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,12 +94,16 @@ public class StartMenu extends javax.swing.JFrame {
         imageIcon = new ImageIcon(newimg);  // transform it back
 
         jLabel3.setIcon(icon);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cpeprog/chefhatpic_small.png"))); // NOI18N
 
         jTextField1.setVisible(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("Enter a recipe here");
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,7 +199,28 @@ public class StartMenu extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String s = (String) JOptionPane.showInputDialog(null, "Search", "Enter your search query", JOptionPane.PLAIN_MESSAGE);
+        if(s!=null){
+            data.put("StartMenuSearch", s);
+            RecipeGUI RecipeGUIHandle=(RecipeGUI)data.get("RecipeGUIHandle");
+            if(RecipeGUIHandle==null){
+                RecipeGUIHandle=new RecipeGUI(data);
+                data.put("RecipeGUIHandle", RecipeGUIHandle);
+            }
+            RecipeGUIHandle.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    setVisible(true);
+                }
+            });
+            setVisible(false);
+            RecipeGUIHandle.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            RecipeGUIHandle.setVisible(true);
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
