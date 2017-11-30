@@ -9,16 +9,14 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-/**
- *
- * @author NeilOliver
- */
 public class CreateRecipeGUI extends javax.swing.JFrame {
     static HashMap<String, Object> data;    
 
@@ -548,6 +546,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             Connection con = d.connect(url, prop);
             if (con == null) {
                 System.out.println("connection failed");
+                JOptionPane.showMessageDialog(null, "connection failed", "Connection Error Encountered", JOptionPane.ERROR_MESSAGE);
                 return;
             } else {
                 System.out.println("Connected.");
@@ -582,8 +581,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         + "`Serving Size` = \'" + servingSize + "\'"
                         + "Where `Recipe Title` = \'" + recipeTitle + "\'");
             }
+            displayInRecipeGUI(recipeTitle);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "SQL Error:\n"+ex, "SQL Error Encountered", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_saveTitleButtonActionPerformed
@@ -677,4 +677,21 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     private javax.swing.JTextField searchField;
     private javax.swing.JSpinner servingSizeSpinner;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+
+    //////////////--------------Other User Methods------------------////////////////
+    public void displayInRecipeGUI(String recipeName){
+        RecipeGUI recipeGUIHandle=(RecipeGUI)GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
+        GUIMgr.openGUI(recipeGUIHandle, new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                GUIMgr.closeGUI();
+            }
+        });
+        recipeGUIHandle.searchFor(recipeName);
+    }
+
 }

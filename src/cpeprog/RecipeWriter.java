@@ -9,10 +9,6 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * @author Christoph John Eric S. Kitane. BS in Computer Engineering, VP for
- * Activities of ACCESS, and President of Youth for Family and Life (YFL)
- */
-/**
  * This program will Write a recipe selected based on the input of a
  * user.
  */
