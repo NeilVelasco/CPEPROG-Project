@@ -12,17 +12,19 @@ import java.sql.*;
 import java.util.*;
 import javax.swing.*;
 
-/**
- *
- * @author NeilOliver
- */
 public class RecipeGUI extends javax.swing.JFrame {
+    static HashMap<String, Object> data;    
 
     /**
      * Creates new form MainGUI
      */
     public RecipeGUI() {
         initComponents();
+        data=new HashMap<>();
+    }
+    public RecipeGUI(HashMap<String,Object> data) {
+        initComponents();
+        this.data=data;
     }
 
     /**
@@ -159,7 +161,7 @@ public class RecipeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addContainerGap(334, Short.MAX_VALUE))
+                        .addContainerGap(328, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,7 +211,7 @@ public class RecipeGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -311,7 +313,7 @@ public class RecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,66 +364,11 @@ public class RecipeGUI extends javax.swing.JFrame {
 
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-
+        searchFor(searchField.getText());
     }//GEN-LAST:event_searchFieldActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        //Checking of Connection.
-        try {
-            String url = "jdbc:mysql://localhost:3306/recipes";
-            Properties prop = new Properties();
-            prop.setProperty("user", "root");
-            prop.setProperty("password", "");
-            Driver d = new com.mysql.jdbc.Driver();
-            Connection con = d.connect(url, prop);
-            if (con == null) {
-                System.out.println("connection failed");
-                return;
-            } else {
-                System.out.println("Connected.");
-            }
-            Statement stat = con.createStatement();
-            //Selecting the Recipe
-            String selectedRecipe;
-            selectedRecipe = searchField.getText();
-            ResultSet result = stat.executeQuery("Select * From MainIndex Where "
-                    + "`Recipe Title` = \'" + selectedRecipe + "\'");
-            //Displaying the Recipe.
-            String recipeType = "";
-            String servingSize = "";
-            String ingredients = "";
-            String steps = "";
-            while (result.next()) {
-                selectedRecipe = result.getString(1);
-                recipeType = result.getString(2);
-                servingSize = result.getString(3);
-                ingredients = result.getString(4);
-                steps = result.getString(5);
-            }
-            recipeTitle.setText(selectedRecipe);
-
-            ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
-                    + ingredients);
-            ingredientsTextArea.setText("");
-            while (ingredientsBreakdown.next()) {
-                ingredientsTextArea.setText(ingredientsTextArea.getText()+"\n"
-                        +ingredientsBreakdown.getString(3) + "\t"
-                        + ingredientsBreakdown.getString(2) + "\t"
-                        + ingredientsBreakdown.getString(1));
-            }
-
-            ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
-                    + steps);
-            procedureTextArea.setText("");
-            while (stepsBreakdoawn.next()) {
-                procedureTextArea.setText(procedureTextArea.getText()+"\n"
-                        +stepsBreakdoawn.getInt(1) + "\t"
-                        + stepsBreakdoawn.getString(2));
-            }
-        } catch (Exception e) {
-            System.out.println("Do Not connect to DB - Error: " + e);
-        }
-
+        searchFor(searchField.getText());
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
@@ -499,4 +446,71 @@ public class RecipeGUI extends javax.swing.JFrame {
     private javax.swing.JTextField searchField;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+
+
+
+    //////////////--------------Other User Methods------------------////////////////
+    public void searchFor(String query){
+        searchField.setText(query);//to show in search bar the search
+        //Checking of Connection.
+        try {
+            String url = "jdbc:mysql://localhost:3306/recipes";
+            Properties prop = new Properties();
+            prop.setProperty("user", "root");
+            prop.setProperty("password", "");
+            Driver d = new com.mysql.jdbc.Driver();
+            Connection con = d.connect(url, prop);
+            if (con == null) {
+                System.out.println("connection failed");
+                return;
+            } else {
+                System.out.println("Connected.");
+            }
+            Statement stat = con.createStatement();
+            //Selecting the Recipe
+            ResultSet result = stat.executeQuery("Select * From MainIndex Where "
+                    + "`Recipe Title` = \'" + query + "\'");
+            //Displaying the Recipe.
+            String recipeType = "";
+            String servingSize = "";
+            String ingredients = "";
+            String steps = "";
+            while (result.next()) {
+                query = result.getString(1);
+                recipeType = result.getString(2);
+                servingSize = result.getString(3);
+                ingredients = result.getString(4);
+                steps = result.getString(5);
+            }
+            recipeTitle.setText(query);
+
+            ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
+                    + ingredients);
+            ingredientsTextArea.setText("");
+            while (ingredientsBreakdown.next()) {
+                ingredientsTextArea.setText(ingredientsTextArea.getText()+"\n"
+                        +ingredientsBreakdown.getString(3) + "\t"
+                        + ingredientsBreakdown.getString(2) + "\t"
+                        + ingredientsBreakdown.getString(1));
+            }
+
+            ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
+                    + steps);
+            procedureTextArea.setText("");
+            while (stepsBreakdoawn.next()) {
+                procedureTextArea.setText(procedureTextArea.getText()+"\n"
+                        +stepsBreakdoawn.getInt(1) + "\t"
+                        + stepsBreakdoawn.getString(2));
+            }
+        } catch (Exception e) {
+            System.out.println("Do Not connect to DB - Error: " + e);
+        }
+
+    }
+
+
 }
