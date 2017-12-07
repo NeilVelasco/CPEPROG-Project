@@ -12,35 +12,43 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.util.HashMap;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
 
 public class StartMenu extends javax.swing.JFrame {
-    static HashMap<String, Object> data;    
-    
+
+    static HashMap<String, Object> data;
+
     /**
      * Creates new form MainMenu
      */
     public StartMenu() {
         initComponents();
-        data=new HashMap<>();
+        data = new HashMap<>();
     }
-    public StartMenu(HashMap<String,Object> data) {
+
+    public StartMenu(HashMap<String, Object> data) {
         initComponents();
-        this.data=data;
+        this.data = data;
     }
-    /** Returns an ImageIcon, or null if the path was invalid. */
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     */
     protected ImageIcon createImageIcon(String path,
-                                                String description) {
-         java.net.URL imgURL = getClass().getResource(path);
-         if (imgURL != null) {
-             return new ImageIcon(imgURL, description);
-         } else {
-             System.err.println("Couldn't find file: " + path);
-             return null;
-         }
-     }
+            String description) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,12 +99,12 @@ public class StartMenu extends javax.swing.JFrame {
             }
         });
 
-        ImageIcon icon = createImageIcon("chefhatpic-small.png","");
+        /*ImageIcon icon = createImageIcon("chefhatpic-small.png","");
         image = icon.getImage(); // transform it
         newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageIcon = new ImageIcon(newimg);  // transform it back
 
-        jLabel3.setIcon(icon);
+        jLabel3.setIcon(icon);*/
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,7 +116,7 @@ public class StartMenu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap(117, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addGap(107, 107, 107)))
@@ -158,7 +166,7 @@ public class StartMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,8 +187,33 @@ public class StartMenu extends javax.swing.JFrame {
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         // TODO addtl+ Let user choose if to get recipe from existing////////////////////////////////////////////////////////////
+        String url = "jdbc:mysql://localhost:3306/recipes";
+        Properties prop = new Properties();
+        prop.setProperty("user", "root");
+        prop.setProperty("password", "");
+        Driver d;
+        try {
+            d = new com.mysql.jdbc.Driver();
+            Connection con = d.connect(url, prop);
+            if (con == null) {
+                System.out.println("connection failed");
+                return;
+            } else {
+                System.out.println("Connected.");
+            }
+            Statement stat = con.createStatement();
+            stat.execute("create table temp_ing(\n"
+                        + "Ingredient varchar(80) not null primary key,\n"
+                        + "`Measurement Type` varchar(20) not null,\n"
+                        + "`Measurement Size` varchar(10) not null)");
+            stat.execute("create table temp_steps(\n"
+                        + "`Step Number` int not null primary key auto_increment,\n"
+                        + "`Content` blob not null)\n");
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        CreateRecipeGUI createRecipeGUIHandle=(CreateRecipeGUI)GUIMgr.getOrGenerateKV("createRecipeGUIHandle", new CreateRecipeGUI(data));
+        CreateRecipeGUI createRecipeGUIHandle = (CreateRecipeGUI) GUIMgr.getOrGenerateKV("createRecipeGUIHandle", new CreateRecipeGUI(data));
         GUIMgr.openGUI(createRecipeGUIHandle, new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -191,8 +224,8 @@ public class StartMenu extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String s = (String) JOptionPane.showInputDialog(null, "Search", "Enter your search query", JOptionPane.PLAIN_MESSAGE);
-        if(s!=null){
-            RecipeGUI recipeGUIHandle=(RecipeGUI)GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
+        if (s != null) {
+            RecipeGUI recipeGUIHandle = (RecipeGUI) GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
             GUIMgr.openGUI(recipeGUIHandle, new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {

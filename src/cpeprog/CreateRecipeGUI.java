@@ -468,7 +468,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             if (result == 0) {
                 System.out.println(steps);
                 procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
-                stat.execute("insert into " + steps + "(`Content`)\n"
+                stat.execute("insert into temp_steps(`Content`)\n"
                         + "values(\'" + textArea.getText() +"\')");
             }
         } catch (SQLException ex) {
@@ -523,7 +523,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                     String measurementType = yField.getText();
                     ingredientsTextArea.setText(string + xField.getText() + "\t" + yField.getText()
                             + "\t" + s);
-                    stat.execute("insert into " + ingredients + "(`Ingredient`,`Measurement"
+                    stat.execute("insert into temp_ing(`Ingredient`,`Measurement"
                             + " Type`,`Measurement Size`)\n"
                             + "values(\'" + ingredient + "\',\'" + measurementType + "\',\'"
                             + measurementSize + "\')");
@@ -569,18 +569,17 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         + "Size`,`Ingredients`,`Steps`)\n"
                         + "values(\'" + recipeTitle + "\',\'" + recipeType + "\',\'" + servingSize
                         + "\',\'" + ingredients + "\',\'" + steps + "\')");
-                stat.execute("create table " + ingredients + "(\n"
-                        + "Ingredient varchar(80) not null primary key,\n"
-                        + "`Measurement Type` varchar(20) not null,\n"
-                        + "`Measurement Size` varchar(10) not null)");
-                stat.execute("create table " + steps + "(\n"
-                        + "`Step Number` int not null primary key auto_increment,\n"
-                        + "`Content` blob not null)\n");
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
             } else {
                 stat.executeUpdate("Update MainIndex "
                         + "Set `Recipe Type` = \'" + recipeType + "\',"
                         + "`Serving Size` = \'" + servingSize + "\'"
                         + "Where `Recipe Title` = \'" + recipeTitle + "\'");
+                stat.execute("drop table "+ingredients);
+                stat.execute("drop table "+steps);
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
             }
             displayInRecipeGUI(recipeTitle);
         } catch (SQLException ex) {
