@@ -70,6 +70,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 500));
+        setMinimumSize(new java.awt.Dimension(900, 500));
+        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
@@ -146,12 +149,13 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(addProcedureButton))
-                        .addContainerGap(291, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(0, 341, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,13 +226,10 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(addIngredientButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(addIngredientButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +253,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -311,7 +312,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(saveTitleButton)
@@ -462,7 +463,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             if (result == 0) {
                 System.out.println(steps);
                 procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
-                stat.execute("insert into " + steps + "(`Content`)\n"
+                stat.execute("insert into temp_steps(`Content`)\n"
                         + "values(\'" + textArea.getText() +"\')");
             }
         } catch (SQLException ex) {
@@ -517,7 +518,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                     String measurementType = yField.getText();
                     ingredientsTextArea.setText(string + xField.getText() + "\t" + yField.getText()
                             + "\t" + s);
-                    stat.execute("insert into " + ingredients + "(`Ingredient`,`Measurement"
+                    stat.execute("insert into temp_ing(`Ingredient`,`Measurement"
                             + " Type`,`Measurement Size`)\n"
                             + "values(\'" + ingredient + "\',\'" + measurementType + "\',\'"
                             + measurementSize + "\')");
@@ -563,18 +564,17 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         + "Size`,`Ingredients`,`Steps`)\n"
                         + "values(\'" + recipeTitle + "\',\'" + recipeType + "\',\'" + servingSize
                         + "\',\'" + ingredients + "\',\'" + steps + "\')");
-                stat.execute("create table " + ingredients + "(\n"
-                        + "Ingredient varchar(80) not null primary key,\n"
-                        + "`Measurement Type` varchar(20) not null,\n"
-                        + "`Measurement Size` varchar(10) not null)");
-                stat.execute("create table " + steps + "(\n"
-                        + "`Step Number` int not null primary key auto_increment,\n"
-                        + "`Content` blob not null)\n");
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
             } else {
                 stat.executeUpdate("Update MainIndex "
                         + "Set `Recipe Type` = \'" + recipeType + "\',"
                         + "`Serving Size` = \'" + servingSize + "\'"
                         + "Where `Recipe Title` = \'" + recipeTitle + "\'");
+                stat.execute("drop table "+ingredients);
+                stat.execute("drop table "+steps);
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
             }
             displayInRecipeGUI(recipeTitle);
         } catch (SQLException ex) {
