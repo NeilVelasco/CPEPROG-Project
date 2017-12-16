@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cpeprog;
 
 import java.awt.GridLayout;
@@ -28,8 +23,8 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         data=new HashMap<>();
     }
     public CreateRecipeGUI(HashMap<String,Object> data) {
-        initComponents();
-        this.data=data;
+        initComponents(); 
+       this.data=data;
     }
 
     /**
@@ -593,19 +588,11 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recipeTypeComboBoxActionPerformed
 
     private boolean isEmptyIngredientsArea() {
-        if (ingredientsTextArea.getText().trim().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return ingredientsTextArea.getText().trim().isEmpty();
     }
 
     private boolean isEmptyProcedureArea() {
-        if (procedureTextArea.getText().trim().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return procedureTextArea.getText().trim().isEmpty();
     }
 
     /**

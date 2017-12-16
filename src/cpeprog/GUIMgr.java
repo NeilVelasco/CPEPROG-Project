@@ -10,6 +10,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class GUIMgr{
@@ -99,6 +101,9 @@ public class GUIMgr{
     }
     //add to windowlistener's windowclosed/windowclosing for closing GUIs
     static void closeGUI(){
+        try {
+            Thread.sleep(150);//just for effects
+        } catch (InterruptedException ex) {}
         guiStack().pop();
         if(!guiStack().isEmpty()){
             guiStack().peek().setVisible(true);
