@@ -109,6 +109,27 @@ public class GUIMgr{
             guiStack().peek().setVisible(true);
         }
     }
+    static void replaceStackTopGUI(JFrame GUI,WindowListener windowListener){
+//        if(!guiStack().isEmpty()){
+//            JFrame curGUI=guiStack().peek();
+//            //remove window listeners to not activate next in stack's visibility
+//            for (WindowListener wl : curGUI.getWindowListeners()) {
+//                GUI.removeWindowListener(wl);
+//            }
+//            //to close current window
+//            curGUI.dispatchEvent(new WindowEvent(curGUI,WindowEvent.WINDOW_CLOSING));
+//            try {
+//                Thread.sleep(150);//just for effects
+//            } catch (InterruptedException ex) {}
+//            //finally pop from GUI stack
+//            guiStack().pop();
+//        }
+//        openGUI(GUI, windowListener);
+        openGUI(GUI, windowListener);
+        JFrame temp=guiStack().pop();
+        guiStack().pop();//pop off the gui to be replaced
+        guiStack().push(temp);
+    }
     
     
     

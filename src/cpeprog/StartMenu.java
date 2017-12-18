@@ -202,6 +202,13 @@ public class StartMenu extends javax.swing.JFrame {
                 System.out.println("Connected.");
             }
             Statement stat = con.createStatement();
+            //drop tables of temp in case it already exists to prevent error
+            try{
+                stat.execute("DROP table temp_ing");
+            } catch (SQLException ex) {} //if it doesn't really exist prior
+            try{
+                stat.execute("DROP table temp_steps");
+            } catch (SQLException ex) {} //if it doesn't really exist prior
             stat.execute("create table temp_ing(\n"
                         + "Ingredient varchar(80) not null primary key,\n"
                         + "`Measurement Type` varchar(20) not null,\n"
