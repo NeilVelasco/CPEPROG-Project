@@ -4,7 +4,7 @@
  *  Package: cpeprog
  *  Description: The ProcedureViewPanel class.
  */
-package cpeprog;
+package unused;
 
 /**
  *

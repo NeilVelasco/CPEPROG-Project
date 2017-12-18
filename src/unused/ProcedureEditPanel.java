@@ -4,7 +4,7 @@
  *  Package: cpeprog
  *  Description: The ProcedureEditPanel class.
  */
-package cpeprog;
+package unused;
 
 /**
  *

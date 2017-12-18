@@ -4,7 +4,7 @@
  *  Package: cpeprog
  *  Description: The IngredientViewPanel class.
  */
-package cpeprog;
+package unused;
 
 import java.awt.event.ActionListener;
 

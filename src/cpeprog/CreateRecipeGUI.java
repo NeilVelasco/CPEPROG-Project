@@ -41,11 +41,6 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        searchField = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
-        menuButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -65,7 +60,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         servingSizeSpinner = new javax.swing.JSpinner();
         recipeTypeComboBox = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -76,41 +71,6 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         setMinimumSize(jPanel1.getMinimumSize());
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
-
-        jLabel1.setFont(new java.awt.Font("Adobe Devanagari", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("VIRTUAL CHEF    ||");
-
-        searchField.setFont(new java.awt.Font("Avalon", 0, 11)); // NOI18N
-        searchField.setToolTipText("Search a recipe here");
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
-
-        searchButton.setFont(new java.awt.Font("Avalon", 0, 11)); // NOI18N
-        searchButton.setText("Search");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-
-        menuButton.setFont(new java.awt.Font("Avalon", 0, 11)); // NOI18N
-        menuButton.setText("Menu");
-        menuButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuButtonActionPerformed(evt);
-            }
-        });
-
-        /*imageIcon = new javax.swing.ImageIcon(getClass().getResource("/cpeprog/search.png"));
-        image = imageIcon.getImage(); // transform it
-        newimg = image.getScaledInstance(25, 25,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageIcon = new ImageIcon(newimg);  // transform it back*/
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        //jLabel2.setIcon(imageIcon);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -158,7 +118,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(addProcedureButton))
-                        .addGap(0, 306, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -323,7 +283,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
                         .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(saveTitleButton)
@@ -344,7 +304,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
         recipeTitleTextField.addMouseListener(new MouseAdapter(){
@@ -356,58 +316,29 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Search a recipe here:");
+        jLabel7.setFont(new java.awt.Font("Adobe Devanagari", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("VIRTUAL CHEF    ||   Cook, Create, Share");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(searchButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menuButton))
-                    .addComponent(jLabel3))
-                .addGap(22, 22, 22))
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchButton)
-                            .addComponent(menuButton))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
-
-        searchField.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                searchField.setText("");
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -417,35 +348,133 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    //Global Variables
-    private String recipeTitle = "";
-    private String recipeType = "";
-    private String servingSize = "";
-    private String ingredients = "";
-    private String steps = "";
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
 
-    }//GEN-LAST:event_searchFieldActionPerformed
+    private void recipeTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipeTypeComboBoxActionPerformed
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchButtonActionPerformed
+    }//GEN-LAST:event_recipeTypeComboBoxActionPerformed
 
-    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
-        jPopupMenu1.show(this, menuButton.getX(), menuButton.getY());
-        jPopupMenu1.setVisible(true);
-    }//GEN-LAST:event_menuButtonActionPerformed
+    private void saveTitleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTitleButtonActionPerformed
+        recipeTitleTextField.setText(recipeTitleTextField.getText().trim());//remove whitespace
+        //TODO remove whitespace from all inputs
+        if(recipeTitleTextField.getText().isEmpty() || recipeTitleTextField.getText().equals(defaultRecipeTitleText)){
+            JOptionPane.showInputDialog(null, "You can't leave the recipe title blank!", "Blank Recipe Title!", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (recipeTitleTextField.getText().equals("temp")){
+            JOptionPane.showInputDialog(null, "Sorry, but temp is a specifically invalid recipe title name...", "Invalid Recipe Title: temp", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
+                System.out.println("connection failed");
+                return;
+            }
+
+            Statement stat = con.createStatement();
+            RecipeWriter recipeWriter = new RecipeWriter();
+            //Writing the Recipe
+            recipeTitle = recipeTitleTextField.getText();
+            recipeType = (String) recipeTypeComboBox.getSelectedItem();
+            servingSize = String.valueOf(servingSizeSpinner.getValue());
+            ingredients = recipeWriter.ingredientsName(recipeTitle);
+            steps = recipeWriter.stepsName(recipeTitle);
+
+            //Checks the Database if there is an existing Recipe.
+            ResultSet result = stat.executeQuery("Select * From MainIndex Where `Recipe Title` = \'"
+                + recipeTitle + "\'");
+            if (!result.next()) {
+                stat.execute("insert into MainIndex(`Recipe Title`,`Recipe Type`,`Serving "
+                    + "Size`,`Ingredients`,`Steps`)\n"
+                    + "values(\'" + recipeTitle + "\',\'" + recipeType + "\',\'" + servingSize
+                    + "\',\'" + ingredients + "\',\'" + steps + "\')");
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
+            } else {
+                int userChoice=JOptionPane.showConfirmDialog(null, "A recipe with the title: "+recipeTitle+" already exists!\n"
+                    + "Do you want to replace that recipe?","Replace Existing Recipe?",JOptionPane.YES_NO_OPTION);
+                if(userChoice==JOptionPane.NO_OPTION || userChoice==JOptionPane.CLOSED_OPTION){
+                    return;//note that finally still runs after this
+                }
+                stat.executeUpdate("Update MainIndex "
+                    + "Set `Recipe Type` = \'" + recipeType + "\',"
+                    + "`Serving Size` = \'" + servingSize + "\'"
+                    + "Where `Recipe Title` = \'" + recipeTitle + "\'");
+                stat.execute("drop table "+ingredients);
+                stat.execute("drop table "+steps);
+                stat.execute("alter table temp_ing rename "+ingredients);
+                stat.execute("alter table temp_steps rename "+steps);
+            }
+            displayInRecipeGUI(recipeTitle);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "SQL Error:\n"+ex, "SQL Error Encountered", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveTitleButtonActionPerformed
 
     private void recipeTitleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipeTitleTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_recipeTitleTextFieldActionPerformed
+
+    private void recipeTitleTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_recipeTitleTextFieldFocusGained
+        if(recipeTitleTextField.getText().equals(defaultRecipeTitleText)){
+            recipeTitleTextField.setText("");
+        }
+    }//GEN-LAST:event_recipeTitleTextFieldFocusGained
+
+    private void addIngredientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientButtonActionPerformed
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
+                System.out.println("connection failed");
+                return;
+            }
+
+            Statement stat = con.createStatement();
+            String string = "";
+            if(ingredientsTextArea.getText().trim().equals("INGREDIENTS HERE")){
+                ingredientsTextArea.setText(string);
+            }
+            if (!isEmptyIngredientsArea()) {
+                string = ingredientsTextArea.getText() + "\n";
+            }
+
+            String s = (String) JOptionPane.showInputDialog(null, "Enter the ingredient name:",
+                "Virtual Chef", JOptionPane.QUESTION_MESSAGE);
+            if (JOptionPane.OK_OPTION == 0) {
+                JTextField xField = new JTextField(5);
+                JTextField yField = new JTextField(5);
+
+                JPanel myPanel = new JPanel(new GridLayout(0, 1));
+                myPanel.add(new JLabel("Enter the quantity and unit of measurement (Ex. 500 grams)"));
+                myPanel.add(new JLabel("Quantity:"));
+                myPanel.add(xField);
+                myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                myPanel.add(new JLabel("Unit of Measurement:"));
+                myPanel.add(yField);
+
+                int result = JOptionPane.showConfirmDialog(null, myPanel,
+                    "Virtual Chef", JOptionPane.OK_CANCEL_OPTION);
+                if (JOptionPane.OK_OPTION == 0) {
+                    String ingredient = s;
+                    String measurementSize = xField.getText();
+                    String measurementType = yField.getText();
+                    ingredientsTextArea.setText(string + xField.getText() + "\t" + yField.getText()
+                        + "\t" + s);
+                    stat.execute("insert into temp_ing(`Ingredient`,`Measurement"
+                        + " Type`,`Measurement Size`)\n"
+                        + "values(\'" + ingredient + "\',\'" + measurementType + "\',\'"
+                        + measurementSize + "\')");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println(ingredientsTextArea.getText());
+    }//GEN-LAST:event_addIngredientButtonActionPerformed
 
     private void addProcedureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcedureButtonActionPerformed
         try (Connection con=GUIMgr.connectSQL()) {//try with resources (for auto closing)
@@ -453,9 +482,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                 System.out.println("connection failed");
                 return;
             }
-            
+
             Statement stat = con.createStatement();
-            
+
             String string = "";
             if(procedureTextArea.getText().trim().equals("PROCEDURE HERE")){
                 procedureTextArea.setText(string);
@@ -472,138 +501,23 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             myPanel.add(textArea);
             textArea.setLineWrap(true);
             int result = JOptionPane.showConfirmDialog(null, myPanel, "Virtual Chef",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == 0) {
                 System.out.println(steps);
                 procedureTextArea.setText(string + procedureCounter + "\t" + textArea.getText());
                 stat.execute("insert into temp_steps(`Content`)\n"
-                        + "values(\'" + textArea.getText() +"\')");
+                    + "values(\'" + textArea.getText() +"\')");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_addProcedureButtonActionPerformed
-
-    private void addIngredientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientButtonActionPerformed
-        try (Connection con=GUIMgr.connectSQL()) {//try with resources
-            if (!GUIMgr.isSQLConnected(con)) {
-                System.out.println("connection failed");
-                return;
-            }
-            
-            Statement stat = con.createStatement();
-            String string = "";
-            if(ingredientsTextArea.getText().trim().equals("INGREDIENTS HERE")){
-                ingredientsTextArea.setText(string);
-            }
-            if (!isEmptyIngredientsArea()) {
-                string = ingredientsTextArea.getText() + "\n";
-            }
-
-            String s = (String) JOptionPane.showInputDialog(null, "Enter the ingredient name:",
-                    "Virtual Chef", JOptionPane.QUESTION_MESSAGE);
-            if (JOptionPane.OK_OPTION == 0) {
-                JTextField xField = new JTextField(5);
-                JTextField yField = new JTextField(5);
-
-                JPanel myPanel = new JPanel(new GridLayout(0, 1));
-                myPanel.add(new JLabel("Enter the quantity and unit of measurement (Ex. 500 grams)"));
-                myPanel.add(new JLabel("Quantity:"));
-                myPanel.add(xField);
-                myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-                myPanel.add(new JLabel("Unit of Measurement:"));
-                myPanel.add(yField);
-
-                int result = JOptionPane.showConfirmDialog(null, myPanel,
-                        "Virtual Chef", JOptionPane.OK_CANCEL_OPTION);
-                if (JOptionPane.OK_OPTION == 0) {
-                    String ingredient = s;
-                    String measurementSize = xField.getText();
-                    String measurementType = yField.getText();
-                    ingredientsTextArea.setText(string + xField.getText() + "\t" + yField.getText()
-                            + "\t" + s);
-                    stat.execute("insert into temp_ing(`Ingredient`,`Measurement"
-                            + " Type`,`Measurement Size`)\n"
-                            + "values(\'" + ingredient + "\',\'" + measurementType + "\',\'"
-                            + measurementSize + "\')");
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        System.out.println(ingredientsTextArea.getText());
-    }//GEN-LAST:event_addIngredientButtonActionPerformed
-
-    private void saveTitleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTitleButtonActionPerformed
-        recipeTitleTextField.setText(recipeTitleTextField.getText().trim());//remove whitespace
-            //TODO remove whitespace from all inputs
-        if(recipeTitleTextField.getText().isEmpty() || recipeTitleTextField.getText().equals(defaultRecipeTitleText)){
-            JOptionPane.showInputDialog(null, "You can't leave the recipe title blank!", "Blank Recipe Title!", JOptionPane.ERROR_MESSAGE);
-            return;
-        } else if (recipeTitleTextField.getText().equals("temp")){
-            JOptionPane.showInputDialog(null, "Sorry, but temp is a specifically invalid recipe title name...", "Invalid Recipe Title: temp", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        try (Connection con=GUIMgr.connectSQL()) {//try with resources
-            if (!GUIMgr.isSQLConnected(con)) {
-                System.out.println("connection failed");
-                return;
-            }
-            
-            Statement stat = con.createStatement();
-            RecipeWriter recipeWriter = new RecipeWriter();
-            //Writing the Recipe
-            recipeTitle = recipeTitleTextField.getText();
-            recipeType = (String) recipeTypeComboBox.getSelectedItem();
-            servingSize = String.valueOf(servingSizeSpinner.getValue());
-            ingredients = recipeWriter.ingredientsName(recipeTitle);
-            steps = recipeWriter.stepsName(recipeTitle);
-
-            //Checks the Database if there is an existing Recipe.
-            ResultSet result = stat.executeQuery("Select * From MainIndex Where `Recipe Title` = \'"
-                    + recipeTitle + "\'");
-            if (!result.next()) {
-                stat.execute("insert into MainIndex(`Recipe Title`,`Recipe Type`,`Serving "
-                        + "Size`,`Ingredients`,`Steps`)\n"
-                        + "values(\'" + recipeTitle + "\',\'" + recipeType + "\',\'" + servingSize
-                        + "\',\'" + ingredients + "\',\'" + steps + "\')");
-                stat.execute("alter table temp_ing rename "+ingredients);
-                stat.execute("alter table temp_steps rename "+steps);
-            } else {
-                int userChoice=JOptionPane.showConfirmDialog(null, "A recipe with the title: "+recipeTitle+" already exists!\n"
-                        + "Do you want to replace that recipe?","Replace Existing Recipe?",JOptionPane.YES_NO_OPTION);
-                if(userChoice==JOptionPane.NO_OPTION || userChoice==JOptionPane.CLOSED_OPTION){
-                    return;//note that finally still runs after this
-                }
-                stat.executeUpdate("Update MainIndex "
-                        + "Set `Recipe Type` = \'" + recipeType + "\',"
-                        + "`Serving Size` = \'" + servingSize + "\'"
-                        + "Where `Recipe Title` = \'" + recipeTitle + "\'");
-                stat.execute("drop table "+ingredients);
-                stat.execute("drop table "+steps);
-                stat.execute("alter table temp_ing rename "+ingredients);
-                stat.execute("alter table temp_steps rename "+steps);
-            }
-            displayInRecipeGUI(recipeTitle);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "SQL Error:\n"+ex, "SQL Error Encountered", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }//GEN-LAST:event_saveTitleButtonActionPerformed
-
-    private void recipeTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipeTypeComboBoxActionPerformed
-
-    }//GEN-LAST:event_recipeTypeComboBoxActionPerformed
-
-    private void recipeTitleTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_recipeTitleTextFieldFocusGained
-        if(recipeTitleTextField.getText().equals(defaultRecipeTitleText)){
-            recipeTitleTextField.setText("");
-        }
-    }//GEN-LAST:event_recipeTitleTextFieldFocusGained
-
+    //Global Variables
+    private String recipeTitle = "";
+    private String recipeType = "";
+    private String servingSize = "";
+    private String ingredients = "";
+    private String steps = "";
     private boolean isEmptyIngredientsArea() {
         return ingredientsTextArea.getText().trim().isEmpty();
     }
@@ -652,15 +566,10 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     private javax.swing.JButton addIngredientButton;
     private javax.swing.JButton addProcedureButton;
     private javax.swing.JTextArea ingredientsTextArea;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private ImageIcon imageIcon;
-    private Image image;
-    private Image newimg;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
@@ -673,13 +582,10 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton menuButton;
     private javax.swing.JTextArea procedureTextArea;
     private javax.swing.JTextField recipeTitleTextField;
     private javax.swing.JComboBox<String> recipeTypeComboBox;
     private javax.swing.JButton saveTitleButton;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JTextField searchField;
     private javax.swing.JSpinner servingSizeSpinner;
     // End of variables declaration//GEN-END:variables
 
