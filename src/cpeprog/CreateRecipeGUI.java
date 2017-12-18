@@ -72,9 +72,8 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 500));
-        setMinimumSize(new java.awt.Dimension(900, 500));
-        setPreferredSize(new java.awt.Dimension(900, 500));
+        setMaximumSize(jPanel1.getMaximumSize());
+        setMinimumSize(jPanel1.getMinimumSize());
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
@@ -123,10 +122,13 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Avalon", 1, 14)); // NOI18N
         jLabel6.setText("Procedure");
 
+        jScrollPane3.setToolTipText("");
+
         procedureTextArea.setColumns(20);
-        procedureTextArea.setRows(5);
+        procedureTextArea.setRows(10);
         procedureTextArea.setText("PROCEDURE HERE");
         procedureTextArea.setEditable(false);
+        procedureTextArea.setWrapStyleWord(true);
         jScrollPane3.setViewportView(procedureTextArea);
         procedureTextArea.addMouseListener(new MouseAdapter(){
             @Override
@@ -156,7 +158,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(addProcedureButton))
-                        .addGap(0, 341, Short.MAX_VALUE)))
+                        .addGap(0, 306, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -219,6 +221,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         ingredientsTextArea.setRows(5);
         ingredientsTextArea.setText("INGREDIENTS HERE");
         ingredientsTextArea.setEditable(false);
+        ingredientsTextArea.setWrapStyleWord(true);
         jScrollPane1.setViewportView(ingredientsTextArea);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -320,7 +323,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(servingSizeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                         .addComponent(recipeTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(saveTitleButton)
@@ -414,7 +417,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -443,24 +448,16 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recipeTitleTextFieldActionPerformed
 
     private void addProcedureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProcedureButtonActionPerformed
-        String url = "jdbc:mysql://localhost:3306/recipes";
-        Properties prop = new Properties();
-        prop.setProperty("user", "root");
-        prop.setProperty("password", "");
-        Driver d;
-        try {
-            d = new com.mysql.jdbc.Driver();
-            Connection con = d.connect(url, prop);
-            if (con == null) {
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources (for auto closing)
+            if (!GUIMgr.isSQLConnected(con)) {
                 System.out.println("connection failed");
                 return;
-            } else {
-                System.out.println("Connected.");
             }
+            
             Statement stat = con.createStatement();
             
             String string = "";
-            if(procedureTextArea.equals("PROCEDURE HERE")){
+            if(procedureTextArea.getText().trim().equals("PROCEDURE HERE")){
                 procedureTextArea.setText(string);
             }
             if (!isEmptyProcedureArea()) {
@@ -497,7 +494,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             
             Statement stat = con.createStatement();
             String string = "";
-            if(ingredientsTextArea.equals("INGREDIENTS HERE")){
+            if(ingredientsTextArea.getText().trim().equals("INGREDIENTS HERE")){
                 ingredientsTextArea.setText(string);
             }
             if (!isEmptyIngredientsArea()) {
@@ -550,22 +547,12 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             return;
         }
         
-        String url = "jdbc:mysql://localhost:3306/recipes";
-        Properties prop = new Properties();
-        prop.setProperty("user", "root");
-        prop.setProperty("password", "");
-        Driver d;
-        Connection con=null;
-        try {
-            d = new com.mysql.jdbc.Driver();
-            con = d.connect(url, prop);
-            if (con == null) {
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
                 System.out.println("connection failed");
-                JOptionPane.showMessageDialog(null, "connection failed", "Connection Error Encountered", JOptionPane.ERROR_MESSAGE);
                 return;
-            } else {
-                System.out.println("Connected.");
             }
+            
             Statement stat = con.createStatement();
             RecipeWriter recipeWriter = new RecipeWriter();
             //Writing the Recipe
@@ -603,14 +590,6 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
             displayInRecipeGUI(recipeTitle);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "SQL Error:\n"+ex, "SQL Error Encountered", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            if(con!=null){
-                try {
-                    con.close(); //good practice to close connections in finally
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "SQL Close Error:\n"+ex, "SQL Error Encountered", JOptionPane.ERROR_MESSAGE);
-                }
-            }
         }
 
     }//GEN-LAST:event_saveTitleButtonActionPerformed
@@ -620,7 +599,9 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recipeTypeComboBoxActionPerformed
 
     private void recipeTitleTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_recipeTitleTextFieldFocusGained
-        recipeTitleTextField.setText("");
+        if(recipeTitleTextField.getText().equals(defaultRecipeTitleText)){
+            recipeTitleTextField.setText("");
+        }
     }//GEN-LAST:event_recipeTitleTextFieldFocusGained
 
     private boolean isEmptyIngredientsArea() {

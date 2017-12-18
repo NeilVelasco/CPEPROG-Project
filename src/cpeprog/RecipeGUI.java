@@ -62,6 +62,7 @@ public class RecipeGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ingredientsTextArea = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
 
         jPopupMenu1.setMaximumSize(new java.awt.Dimension(20, 50));
         jPopupMenu1.setMinimumSize(new java.awt.Dimension(100, 100));
@@ -77,18 +78,15 @@ public class RecipeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(900, 500));
         setMinimumSize(new java.awt.Dimension(900, 500));
-        setPreferredSize(new java.awt.Dimension(900, 500));
 
         jPanel1.setBackground(new java.awt.Color(153, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Adobe Devanagari", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("VIRTUAL CHEF    ||");
+        jLabel1.setText("VIRTUAL CHEF    ||   Cook, Create, Share");
 
         searchField.setFont(new java.awt.Font("Avalon", 0, 11)); // NOI18N
-        searchField.setText("Search a recipe here");
         searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFieldActionPerformed(evt);
@@ -136,16 +134,19 @@ public class RecipeGUI extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Avalon", 1, 14)); // NOI18N
         jLabel6.setText("Procedure");
 
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setHorizontalScrollBar(null);
+
         procedureTextArea.setColumns(20);
+        procedureTextArea.setLineWrap(true);
         procedureTextArea.setRows(5);
-        procedureTextArea.setText("ENTER PROCEDURE HERE");
+        procedureTextArea.setText("ENTER PROCEDURE HERE\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum, nulla nec congue sodales, justo lorem egestas arcu, a tristique erat dolor ut dolor. Duis quis condimentum sapien. Nullam fermentum turpis vitae turpis tempus ultrices. Donec sagittis eros quis ligula tincidunt mollis. Sed quis urna sit amet lectus convallis porta. Aenean vitae fringilla mi. Vestibulum et pulvinar nibh, vitae suscipit velit. Vestibulum ac tincidunt lectus, quis consectetur dolor. Duis consectetur lorem sit amet magna commodo, a tincidunt justo suscipit. Pellentesque cursus elit ac aliquam dignissim. Praesent mauris lectus, pharetra et dapibus sit amet, convallis eget sapien. Curabitur velit risus, rutrum in pharetra id, bibendum id velit. Fusce lacus tortor, tristique ut tellus et, laoreet blandit turpis. Maecenas orci tortor, pellentesque non tellus eu, lacinia pharetra nulla. Aliquam erat volutpat.\n\nFusce varius lacus at nisl maximus, non posuere urna volutpat. Suspendisse volutpat lacinia est, eu pretium velit efficitur quis. Mauris leo erat, commodo nec maximus ac, faucibus et dolor. Nulla tincidunt pretium iaculis. Nunc a erat at dolor tempus porta et non sapien. Curabitur ac viverra orci. Curabitur bibendum nibh nec blandit sollicitudin. Donec vel nisi convallis, finibus erat sit amet, imperdiet felis. Integer dignissim erat dui, eget luctus felis ornare non. Curabitur mollis condimentum congue.\n\nSed gravida semper turpis ut suscipit. Nunc bibendum nisi sit amet eros sollicitudin pretium. Pellentesque feugiat sed enim et fermentum. Maecenas a turpis odio. Quisque at vestibulum turpis. Duis vitae dolor sit amet sem gravida rhoncus. Morbi quis congue est. Morbi ligula magna, tristique quis lobortis ut, congue quis arcu. Morbi sit amet nisi sit amet nibh congue suscipit quis et ipsum. Praesent hendrerit nibh erat, vitae vestibulum libero tincidunt vel. Sed feugiat nibh urna, nec consequat turpis feugiat vel. Nunc tortor velit, auctor a ligula nec, dignissim bibendum nisi.\n\nSuspendisse suscipit varius nunc, vitae iaculis felis convallis eu. Curabitur rutrum sollicitudin vulputate. Ut gravida ex vitae neque convallis fringilla. Vestibulum pellentesque metus vitae nisi ultricies, sollicitudin aliquet risus commodo. Duis vel augue vel enim imperdiet dapibus. Cras id fringilla metus. Sed laoreet, purus et bibendum sodales, nulla ante tempor augue, vitae eleifend orci quam nec justo. Nulla semper, metus eget egestas vulputate, leo lacus tincidunt massa, at placerat tellus ante at lacus. Aliquam quis metus ullamcorper dui ornare pharetra. Suspendisse sit amet ornare urna, a tincidunt odio. Mauris eget luctus turpis. Praesent at elementum tellus, a accumsan arcu.\n\nIn ac condimentum erat. Vestibulum feugiat pretium eros at auctor. Nunc dignissim sapien non felis congue, eu vestibulum massa auctor. Pellentesque nec metus luctus, feugiat mauris convallis, placerat turpis. Vivamus dictum ultrices tortor sit amet lobortis. Nulla augue velit, mattis convallis dapibus nec, faucibus a nulla. Suspendisse nec justo euismod, vehicula ex ut, laoreet ex.\n\nVestibulum varius gravida nibh sed lacinia. Suspendisse dolor mi, sodales id libero non, lobortis egestas justo. Integer facilisis faucibus metus in suscipit. Nunc vitae nibh sapien. Aenean tincidunt arcu est, vel malesuada enim porta sit amet. Suspendisse finibus, magna a commodo cursus, felis orci ultrices justo, id pharetra orci massa at massa. Ut imperdiet luctus tortor, a facilisis purus blandit condimentum. Phasellus commodo augue a odio scelerisque ultrices. Sed et justo et nulla venenatis aliquam. Donec vel risus arcu. Nam ullamcorper eget lacus eu interdum. Nam vestibulum egestas ligula luctus pharetra. Etiam tincidunt quam consequat nisl fringilla, nec vestibulum ante venenatis. Etiam congue sapien nec faucibus pulvinar. Nulla a diam odio. Nam vehicula fringilla sapien, at sagittis lacus maximus non.\n\nEtiam placerat commodo mi non auctor. Integer sit amet massa interdum, scelerisque mauris ut, bibendum nulla. Sed pulvinar condimentum accumsan. Pellentesque placerat leo tellus, ac viverra risus ornare vel. Phasellus ornare blandit purus, id condimentum nisi tempus a. Sed non augue imperdiet, luctus neque vel, consequat mi. Sed sed nulla dignissim, molestie risus non, dignissim odio.\n\nDuis commodo, massa ut pharetra elementum, nulla nulla venenatis lorem, malesuada eleifend sapien odio quis leo. Vestibulum nec libero at elit tincidunt molestie. Suspendisse nec convallis orci, eleifend ultricies urna. Donec consequat justo ac varius maximus. Aenean quis augue sit amet ipsum dignissim mollis. Vestibulum vel velit dolor. Nunc at tincidunt metus, sit amet lacinia purus. Integer ac porta quam. Aenean viverra velit ut lorem dictum, sit amet bibendum orci sollicitudin. Praesent sollicitudin nisl et metus hendrerit accumsan. Mauris cursus ultrices ligula. Aenean eget sagittis dui. In sit amet semper velit. Etiam quis nibh quam. Mauris lorem augue, imperdiet eget fermentum ut, pretium eu felis. Nulla facilisi.\n\nSed finibus turpis at faucibus pharetra. Etiam porta vulputate vehicula. Nullam porta mollis leo et lacinia. Praesent quis dolor libero. Curabitur vitae lobortis ipsum, id fermentum nisi. Nunc sed consectetur sem, non vehicula est. Morbi id blandit est, at porta tortor. Cras accumsan mi eu lectus dignissim molestie. Pellentesque vel sagittis elit. Aliquam pulvinar purus ac libero rhoncus tempor non ut arcu.\n\nNam posuere tortor lectus, ac pharetra elit mattis ac. Proin vel sapien urna. Phasellus sagittis, felis pellentesque luctus convallis, tortor orci aliquet libero, a cursus magna nulla a metus. Morbi fermentum porttitor neque, sit amet bibendum tortor tempus id. Donec a neque non neque posuere maximus. Pellentesque porttitor, elit pharetra auctor lobortis, quam metus vulputate dolor, vitae lacinia lorem elit id massa. Pellentesque eu purus lectus. In hac habitasse platea dictumst. Ut sit amet aliquet diam, at viverra mi. Aenean sed nisl dolor. Ut enim metus, tempus sed mauris eu, egestas fermentum erat. Ut tincidunt arcu ipsum, luctus pharetra quam aliquet quis. Duis ullamcorper at lorem vel venenatis. Donec vel urna eget augue rutrum semper. Vivamus aliquet ornare justo sit amet euismod.");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, procedureTextArea, org.jdesktop.beansbinding.ELProperty.create("${text_ON_FOCUS_LOST}"), procedureTextArea, org.jdesktop.beansbinding.BeanProperty.create("wrapStyleWord"));
         bindingGroup.addBinding(binding);
 
         jScrollPane2.setViewportView(procedureTextArea);
         procedureTextArea.setEditable(false);
-        procedureTextArea.setLineWrap(true);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -192,7 +193,7 @@ public class RecipeGUI extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Avalon", 0, 11)); // NOI18N
-        jLabel5.setText("SERVING: Good for");
+        jLabel5.setText("SERVING SIZE: Good for");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -298,6 +299,9 @@ public class RecipeGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Search a recipe here:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -305,14 +309,17 @@ public class RecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(searchButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(menuButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(menuButton)))
                 .addGap(22, 22, 22))
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -321,13 +328,20 @@ public class RecipeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(searchButton)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(menuButton))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchButton)
+                            .addComponent(menuButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -411,6 +425,7 @@ public class RecipeGUI extends javax.swing.JFrame {
     private ImageIcon imageIcon;
     private Image image;
     private Image newimg;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -450,39 +465,53 @@ public class RecipeGUI extends javax.swing.JFrame {
             
             Statement stat = con.createStatement();
             //Selecting the Recipe
-            ResultSet result = stat.executeQuery("Select * From MainIndex Where "
-                    + "`Recipe Title` = \'" + query + "\'");
+            ResultSet result = null;
             //Displaying the Recipe.
-            String recipeType = "";
+            String recipeType = "N/A";
             String servingSize = "";
             String ingredients = "";
             String steps = "";
-            while (result.next()) {
-                query = result.getString(1);
-                recipeType = result.getString(2);
-                servingSize = result.getString(3);
-                ingredients = result.getString(4);
-                steps = result.getString(5);
-            }
+            try {
+                result = stat.executeQuery("Select * From MainIndex Where "
+                        + "`Recipe Title` = \'" + query + "\'");
+                while (result.next()) {
+                    query = result.getString(1);
+                    recipeType = result.getString(2);
+                    servingSize = result.getString(3);
+                    ingredients = result.getString(4);
+                    steps = result.getString(5);
+                }
+            } catch (SQLException sqle){}
+            
+            
             recipeTitle.setText(query);
 
-            ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
-                    + ingredients);
-            ingredientsTextArea.setText("");
-            while (ingredientsBreakdown.next()) {
-                ingredientsTextArea.setText(ingredientsTextArea.getText()+"\n"
-                        +ingredientsBreakdown.getString(3) + "\t"
-                        + ingredientsBreakdown.getString(2) + "\t"
-                        + ingredientsBreakdown.getString(1));
+            try {
+                ResultSet ingredientsBreakdown = stat.executeQuery("Select * from "
+                        + ingredients);
+                ingredientsTextArea.setText("");
+                while (ingredientsBreakdown.next()) {
+                    ingredientsTextArea.setText(ingredientsTextArea.getText()+"\n"
+                            +ingredientsBreakdown.getString(3) + "\t"
+                            + ingredientsBreakdown.getString(2) + "\t"
+                            + ingredientsBreakdown.getString(1));
+                }
+            } catch (SQLException sqle2){
+                ingredientsTextArea.setText("Ingredient Data Not Found.");
             }
+            
 
-            ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
-                    + steps);
-            procedureTextArea.setText("");
-            while (stepsBreakdoawn.next()) {
-                procedureTextArea.setText(procedureTextArea.getText()+"\n"
-                        +stepsBreakdoawn.getInt(1) + "\t"
-                        + stepsBreakdoawn.getString(2));
+            try {
+                ResultSet stepsBreakdoawn = stat.executeQuery("Select * from "
+                        + steps);
+                procedureTextArea.setText("");
+                while (stepsBreakdoawn.next()) {
+                    procedureTextArea.setText(procedureTextArea.getText()+"\n"
+                            +stepsBreakdoawn.getInt(1) + "\t"
+                            + stepsBreakdoawn.getString(2));
+                }
+            } catch (SQLException sqle3){
+                procedureTextArea.setText("Procedure Data Not Found.");
             }
         } catch (Exception e) {
             System.out.println("Did Not connect to DB - Error: " + e);
