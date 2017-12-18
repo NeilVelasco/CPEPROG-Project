@@ -489,20 +489,12 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addProcedureButtonActionPerformed
 
     private void addIngredientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngredientButtonActionPerformed
-        String url = "jdbc:mysql://localhost:3306/recipes";
-        Properties prop = new Properties();
-        prop.setProperty("user", "root");
-        prop.setProperty("password", "");
-        Driver d;
-        try {
-            d = new com.mysql.jdbc.Driver();
-            Connection con = d.connect(url, prop);
-            if (con == null) {
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
                 System.out.println("connection failed");
                 return;
-            } else {
-                System.out.println("Connected.");
             }
+            
             Statement stat = con.createStatement();
             String string = "";
             if(ingredientsTextArea.equals("INGREDIENTS HERE")){
@@ -719,7 +711,7 @@ public class CreateRecipeGUI extends javax.swing.JFrame {
         //close this gui (and not open previous one)
         
         //open recipeGUI with search
-        RecipeGUI recipeGUIHandle=(RecipeGUI)GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
+        RecipeGUI recipeGUIHandle=GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
         GUIMgr.replaceStackTopGUI(recipeGUIHandle, new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
