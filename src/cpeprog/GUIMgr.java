@@ -8,7 +8,11 @@ package cpeprog;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,10 +37,10 @@ public class GUIMgr{
         });
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Global Variables ~~~~~~~~~~~~~~~~~~~~~~~~~//
-    static HashMap<String, Object> data;
+    public static HashMap<String, Object> data;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
         //somewhat backend
-    static void moveToGUIStackTop(JFrame window){//adds, or moves to top of GUI class "call stack"
+    public static void moveToGUIStackTop(JFrame window){//adds, or moves to top of GUI class "call stack"
         //this takes advantage of the fact that there is only one instance of a static object (data)
         Stack<JFrame> guiStack=(Stack<JFrame>)data.get("guiStack");
         if(guiStack==null){
@@ -50,7 +54,7 @@ public class GUIMgr{
             guiStack.push(window);
         }
     }
-    static Stack<JFrame> guiStack(){
+    public static Stack<JFrame> guiStack(){
         Stack<JFrame> guiStack=(Stack<JFrame>)data.get("guiStack");
         if(guiStack==null){
             guiStack=new Stack<>();
@@ -65,13 +69,13 @@ public class GUIMgr{
      * default generate if not yet generated for data hashmap
      *      oh, and don't forget to cast to your type, if needed
      * @param key
-     * @param newObject object placed in generated KV pair
+     * @param newVal object placed in generated KV pair
      * @return 
      */
-    static Object getOrGenerateKV(String key,Object newObject){
-        Object obj=data.get(key);
+    public static <V> V getOrGenerateKV(String key,V newVal){
+        V obj=(V)data.get(key);
         if(obj==null){
-            obj=newObject;
+            obj=newVal;
             data.put(key, obj);
         }
         return obj;
@@ -85,7 +89,7 @@ public class GUIMgr{
          *      next window set visible
          * @param GUI 
          */
-    static void openGUI(JFrame GUI,WindowListener windowListener){
+    public static void openGUI(JFrame GUI,WindowListener windowListener){
         if(!guiStack().isEmpty()){
             guiStack().peek().setVisible(false);
         }
@@ -100,7 +104,7 @@ public class GUIMgr{
         GUI.setVisible(true);
     }
     //add to windowlistener's windowclosed/windowclosing for closing GUIs
-    static void closeGUI(){
+    public static void closeGUI(){
         try {
             Thread.sleep(150);//just for effects
         } catch (InterruptedException ex) {}
@@ -109,26 +113,57 @@ public class GUIMgr{
             guiStack().peek().setVisible(true);
         }
     }
-    static void replaceStackTopGUI(JFrame GUI,WindowListener windowListener){
-//        if(!guiStack().isEmpty()){
-//            JFrame curGUI=guiStack().peek();
-//            //remove window listeners to not activate next in stack's visibility
-//            for (WindowListener wl : curGUI.getWindowListeners()) {
-//                GUI.removeWindowListener(wl);
-//            }
-//            //to close current window
-//            curGUI.dispatchEvent(new WindowEvent(curGUI,WindowEvent.WINDOW_CLOSING));
-//            try {
-//                Thread.sleep(150);//just for effects
-//            } catch (InterruptedException ex) {}
-//            //finally pop from GUI stack
-//            guiStack().pop();
-//        }
-//        openGUI(GUI, windowListener);
+    public static void replaceStackTopGUI(JFrame GUI,WindowListener windowListener){
         openGUI(GUI, windowListener);
         JFrame temp=guiStack().pop();
         guiStack().pop();//pop off the gui to be replaced
         guiStack().push(temp);
+    }
+    //=============================================================================================================//
+    
+    //calling the database (I noticed it was being too repetitive)
+    public static Connection connectSQL(){
+        Connection con=null;
+//        if(con==null){
+        String url = "jdbc:mysql://localhost:3306/recipes";
+        Properties prop = new Properties();
+        prop.setProperty("user", "root");
+        prop.setProperty("password", "");
+        Driver d;
+        try {
+            d = new com.mysql.jdbc.Driver();
+            con = d.connect(url, prop);
+            data.put("con", con);
+        } catch (SQLException sqle){
+            System.err.println("SQL Connect Error:\n"+sqle);
+            sqle.printStackTrace();
+        }
+//        }
+        return con;
+    }
+    public static boolean isSQLConnected(Connection con){
+        try {
+            if(con!=null && con.isValid(0)){
+                System.out.println("SQL Connection Successful");
+                return true;
+            } else {
+                System.out.println("SQL Connection Failed. Make sure MySQL is Started and con variable is properly initialized.");
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQL Connection Failed. Make sure MySQL is Started and con variable is properly initialized.");
+            ex.printStackTrace();
+            return false;
+        }
+    }    
+    public static void closeSQLConnection(Connection con){
+       if(con!=null){
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       } 
     }
     
     

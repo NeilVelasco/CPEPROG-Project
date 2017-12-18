@@ -187,20 +187,12 @@ public class StartMenu extends javax.swing.JFrame {
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         // TODO addtl+ Let user choose if to get recipe from existing////////////////////////////////////////////////////////////
-        String url = "jdbc:mysql://localhost:3306/recipes";
-        Properties prop = new Properties();
-        prop.setProperty("user", "root");
-        prop.setProperty("password", "");
-        Driver d;
-        try {
-            d = new com.mysql.jdbc.Driver();
-            Connection con = d.connect(url, prop);
-            if (con == null) {
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
                 System.out.println("connection failed");
                 return;
-            } else {
-                System.out.println("Connected.");
             }
+            
             Statement stat = con.createStatement();
             //drop tables of temp in case it already exists to prevent error
             try{
@@ -217,10 +209,10 @@ public class StartMenu extends javax.swing.JFrame {
                         + "`Step Number` int not null primary key auto_increment,\n"
                         + "`Content` blob not null)\n");
         } catch (SQLException ex) {
-            Logger.getLogger(CreateRecipeGUI.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         
-        CreateRecipeGUI createRecipeGUIHandle = (CreateRecipeGUI) GUIMgr.getOrGenerateKV("createRecipeGUIHandle", new CreateRecipeGUI(data));
+        CreateRecipeGUI createRecipeGUIHandle = GUIMgr.getOrGenerateKV("createRecipeGUIHandle", new CreateRecipeGUI(data));
         GUIMgr.openGUI(createRecipeGUIHandle, new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -232,7 +224,7 @@ public class StartMenu extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String s = (String) JOptionPane.showInputDialog(null, "Search", "Enter your search query", JOptionPane.PLAIN_MESSAGE);
         if (s != null) {
-            RecipeGUI recipeGUIHandle = (RecipeGUI) GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
+            RecipeGUI recipeGUIHandle = GUIMgr.getOrGenerateKV("recipeGUIHandle", new RecipeGUI(data));
             GUIMgr.openGUI(recipeGUIHandle, new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {

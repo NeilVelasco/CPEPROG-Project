@@ -167,7 +167,7 @@ public class RecipeGUI extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -234,7 +234,7 @@ public class RecipeGUI extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,7 +265,7 @@ public class RecipeGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -442,19 +442,12 @@ public class RecipeGUI extends javax.swing.JFrame {
     public void searchFor(String query){
         searchField.setText(query);//to show in search bar the search
         //Checking of Connection.
-        try {
-            String url = "jdbc:mysql://localhost:3306/recipes";
-            Properties prop = new Properties();
-            prop.setProperty("user", "root");
-            prop.setProperty("password", "");
-            Driver d = new com.mysql.jdbc.Driver();
-            Connection con = d.connect(url, prop);
-            if (con == null) {
+        try (Connection con=GUIMgr.connectSQL()) {//try with resources
+            if (!GUIMgr.isSQLConnected(con)) {
                 System.out.println("connection failed");
                 return;
-            } else {
-                System.out.println("Connected.");
             }
+            
             Statement stat = con.createStatement();
             //Selecting the Recipe
             ResultSet result = stat.executeQuery("Select * From MainIndex Where "
@@ -492,7 +485,8 @@ public class RecipeGUI extends javax.swing.JFrame {
                         + stepsBreakdoawn.getString(2));
             }
         } catch (Exception e) {
-            System.out.println("Do Not connect to DB - Error: " + e);
+            System.out.println("Did Not connect to DB - Error: " + e);
+            e.printStackTrace();
         }
 
     }
